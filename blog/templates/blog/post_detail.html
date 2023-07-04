@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="post">
+    {% if post.published_date %}
+    <div class="date">
+        published: 2014/06/14, 12:14
+    </div>
+    {% endif %}
+    <h2>My first post</h2>
+    <p>Aenean eu leo quam. こんにちは！ よろしくお願いします！</p>
+</div>
+<div class="post">
+    {% if post.published_date %}
+    <div class="date">
+        公開日: 2014/06/14, 12:14
+    </div>
+    {% endif %}
+    <h2>二番目の投稿</h2>
+    <p>こんにちは！ よろしくお願いします！</p>
+</div>
+{% endblock %}
