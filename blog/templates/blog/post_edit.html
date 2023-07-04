@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<h2>New post</h2>
+<form method="POST" class="post-form">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+{% endblock %}
+def post_edit(request, pk):
+post = get_object_or_404(Post, pk=pk)
+if request.method == "POST":
+form = PostForm(request.POST, instance=post)
+if form.is_valid():
+post = form.save(commit=False)
+post.author = request.user
+post.published_date = timezone.now()
+post.save()
+return redirect('post_detail', pk=post.pk)
+else:
+form = PostForm(instance=post)
+return render(request, 'blog/post_edit.html', {'form': form})
